@@ -25,6 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/validations/login";
 import { z } from "zod";
 import { constants } from "@/lib/utils/constant";
+import { useTranslations } from "next-intl";
 
 const { countryCodes } = constants;
 
@@ -43,18 +44,19 @@ export function LoginForm({
   });
 
   const submitAction = async (formData: FormData) => {
-    let fullPhone = countryCode + formData.get("phone");
+    const fullPhone = countryCode + formData.get("phone");
     formData.set("phone", fullPhone);
     await loginAction(formData);
   };
+  const t = useTranslations("login");
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
+          <CardTitle className="text-xl">{t("title")}</CardTitle>
           <CardDescription>
-            Login with your phone number and password below.
+            {t("description")}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -63,7 +65,7 @@ export function LoginForm({
               <input type="hidden" name="countryCode" value={countryCode} />
               <div className="grid gap-4 sm:grid-cols-[75px_minmax(0,1fr)]">
                 <div className="grid gap-2">
-                  <label className="text-sm font-medium leading-none">Code</label>
+                  <label className="text-sm font-medium leading-none">{t("countryCode")}</label>
                   <select
                     value={countryCode}
                     onChange={(event) => setCountryCode(event.target.value)}
@@ -84,14 +86,13 @@ export function LoginForm({
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter your phone number" {...field} />
+                        <Input placeholder={t("phonePlaceholder")} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
-
               <FormField
                 control={form.control}
                 name="password"
@@ -107,13 +108,12 @@ export function LoginForm({
               />
 
               <Button type="submit" className="w-full">
-                Submit
+                {t("submit")}
               </Button>
             </form>
           </Form>
-
           <div className="mt-4 text-center text-sm text-muted-foreground">
-            Don&apos;t have an account? <a href="/register">Register</a>
+            {t("noAccount")} <a href="/register">{t("register")}</a>
           </div>
         </CardContent>
       </Card>

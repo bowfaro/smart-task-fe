@@ -1,30 +1,45 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
-const PUBLIC_ROUTES = ["/login", "/register", "/verify", "/overview"];
-const PROTECTED_ROUTES = ["/dashboard"];
+const PUBLIC_ROUTES = ["/login", "/register", "/verify"];
+const PROTECTED_ROUTES = ["/dashboard", "/overview"];
 
-export function proxy(request: NextRequest) {
+const intlProxy = createMiddleware(routing);
+
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const cleanPath = stripLocale(pathname);
 
   const accessToken = request.cookies.get("ac")?.value;
   const isAuthenticated = !!accessToken;
 
-  if (!isAuthenticated && isProtectedRoute(pathname)) {
+  if (!isAuthenticated && isProtectedRoute(cleanPath)) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isAuthenticated && isPublicRoute(pathname)) {
+  if (isAuthenticated && isPublicRoute(cleanPath)) {
     return NextResponse.redirect(new URL("/overview", request.url));
   }
 
-  if (pathname === "/") {
+  if (cleanPath === "/") {
     const destination = isAuthenticated ? "/overview" : "/login";
     return NextResponse.redirect(new URL(destination, request.url));
   }
-  return NextResponse.next();
+
+  return intlProxy(request);
+}
+
+function stripLocale(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  const hasLocalePrefix = routing.locales.includes(
+    segments[0] as (typeof routing.locales)[number],
+  );
+  const rest = hasLocalePrefix ? segments.slice(1) : segments;
+  return "/" + rest.join("/");
 }
 
 function isPublicRoute(pathname: string): boolean {

@@ -8,4 +8,4 @@ export default function LoginPage({children}: { children: ReactNode }) {
       </div>
     </div>
   )
-}
+} 

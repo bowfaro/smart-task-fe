@@ -1,0 +1,13 @@
+{
+  "common": { "loading": "Đang tải...", "save": "Lưu", "cancel": "Hủy" },
+  "login": {
+    "title": "Chào mừng trở lại",
+    "description": "Đăng nhập với số điện thoại và mật khẩu của bạn",
+    "countryCode": "Mã quốc gia",
+    "phonePlaceholder": "Nhập số điện thoại",
+    "password": "Mật khẩu",
+    "submit": "Đăng nhập",
+    "noAccount": "Chưa có tài khoản?",
+    "register": "Đăng ký"
+  }
+}
