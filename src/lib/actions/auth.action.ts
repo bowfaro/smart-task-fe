@@ -12,12 +12,17 @@ export async function loginAction(formData: FormData) {
     return { success: false, error: parsed.error.flatten().fieldErrors };
   }
   try {
-    const { accessToken, refreshToken } = await loginApi(parsed.data);
+    const { countryCode, phone, password } = parsed.data;
+    const fullPhone = `${countryCode}${phone}`;
+    const { accessToken, refreshToken } = await loginApi({
+      phone: fullPhone,
+      password,
+    });
     await setCookie("ac", accessToken, {
-      maxAge: parseInt(process.env.AC_MAXAGE || "1"),
+      maxAge: parseInt(process.env.AC_MAXAGE || "900"),
     });
     await setCookie("rf", refreshToken, {
-      maxAge: parseInt(process.env.RF_MAXAGE || "5"),
+      maxAge: parseInt(process.env.RF_MAXAGE || "604800"),
     });
   } catch (error) {
     return error;

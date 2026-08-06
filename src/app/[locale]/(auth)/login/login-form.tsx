@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { } from "react";
 import { loginAction } from "@/lib/actions/auth.action";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
@@ -26,28 +26,24 @@ import { loginSchema } from "@/lib/validations/login";
 import { z } from "zod";
 import { constants } from "@/lib/utils/constant";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import PhoneField from "@/components/phone-filed";
 
-const { countryCodes } = constants;
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [countryCode, setCountryCode] = useState("+84");
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
+      countryCode: constants.countryCodes[0] || "+84",
       phone: "",
       password: "",
     },
   });
 
-  const submitAction = async (formData: FormData) => {
-    const fullPhone = countryCode + formData.get("phone");
-    formData.set("phone", fullPhone);
-    await loginAction(formData);
-  };
   const t = useTranslations("login");
 
   return (
@@ -61,38 +57,8 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form action={submitAction} className="space-y-4">
-              <input type="hidden" name="countryCode" value={countryCode} />
-              <div className="grid gap-4 sm:grid-cols-[75px_minmax(0,1fr)]">
-                <div className="grid gap-2">
-                  <label className="text-sm font-medium leading-none">{t("countryCode")}</label>
-                  <select
-                    value={countryCode}
-                    onChange={(event) => setCountryCode(event.target.value)}
-                    className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-                  >
-                    {countryCodes.map((code) => (
-                      <option key={code} value={code}>
-                        {code}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input placeholder={t("phonePlaceholder")} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+            <form action={loginAction} className="space-y-4">
+             <PhoneField control={form.control} />
               <FormField
                 control={form.control}
                 name="password"
@@ -113,7 +79,7 @@ export function LoginForm({
             </form>
           </Form>
           <div className="mt-4 text-center text-sm text-muted-foreground">
-            {t("noAccount")} <a href="/register">{t("register")}</a>
+            {t("noAccount")} <Link href="/register" className="text-primary underline">{t("register")}</Link>
           </div>
         </CardContent>
       </Card>
