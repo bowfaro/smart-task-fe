@@ -1,0 +1,13 @@
+{
+  "common": { "loading": "Loading...", "save": "Save", "cancel": "Cancel" },
+  "login": {
+    "title": "Welcome back",
+    "description": "Login with your phone number and password below.",
+    "countryCode": "Country Code",
+    "phonePlaceholder": "Enter your phone number",
+    "password": "Password",
+    "submit": "Sign in",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
+  }
+}

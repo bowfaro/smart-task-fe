@@ -6,8 +6,8 @@ interface LoginPayload {
 }
 
 interface AuthResponse {
-  ac: string;
-  rf: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export function loginApi(payload: LoginPayload) {
@@ -29,6 +29,6 @@ export function logoutApi(rf: string) {
 export function getMeApi() {
   return apiRequest<{ id: string; email: string; name: string }>({
     method: "GET",
-    url: "/auth/me",
+    url: "/users/me",
   });
 }

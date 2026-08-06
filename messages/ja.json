@@ -1,0 +1,12 @@
+{
+    "common": { "loading": "Loading...", "save": "Save", "cancel": "Cancel" },
+    "login": {
+      "title": "",
+      "description": "Login with your phone number and password below.",
+      "countryCode": "",
+      "phonePlaceholder": "電話番号を入力してください",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "submit": "ログイン"
+    }
+}

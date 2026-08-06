@@ -11,6 +11,7 @@ import {useForm} from "react-hook-form";
 import {registerSchema} from "@/lib/validations/register";
 import {z} from "zod";
 import {toast} from "sonner";
+import { useTranslations } from "next-intl";
 
 export function RegisterForm({
                                className,
@@ -34,6 +35,7 @@ export function RegisterForm({
       toast.error(error.message);
     }
   };
+  const t = useTranslations("register");
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
