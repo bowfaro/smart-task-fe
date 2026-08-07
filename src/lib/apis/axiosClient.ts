@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
+import { setCookie } from "../utils/functions";
 
 export const publicApi = axios.create({
   baseURL: process.env.API_URL,
@@ -48,23 +49,15 @@ async function refreshAccessToken(): Promise<boolean> {
   if (!rf) return false;
 
   try {
-    const res = await publicApi.post("/auth/refresh", { rf });
-    const { ac, rf: newRf } = res.data;
+    const res = await publicApi.post("/token/access-token", { rf });
+    const { accessToken, refreshToken: newRf } = res.data;
 
-    cookieStore.set("ac", ac, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      path: "/",
-      maxAge: 15 * 60,
+    await setCookie("ac", accessToken, {
+      maxAge: parseInt(process.env.AC_MAXAGE || "900"),
     });
     if (newRf) {
-      cookieStore.set("rf", newRf, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-        path: "/api/auth",
-        maxAge: 30 * 24 * 60 * 60,
+      await setCookie("rf", refreshToken, {
+        maxAge: parseInt(process.env.RF_MAXAGE || "604800"),
       });
     }
     return true;
