@@ -20,11 +20,13 @@ import { NavMain } from "@/components/nav-main"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { NavSecondary } from "./nav-secondary"
 
 const data = {
   user: {
@@ -48,6 +50,7 @@ const data = {
       url: "#",
       icon: IconCalendar,
     },
+    // {title:"Settings", url:"#", icon:IconSettings},
   ],
   navClouds: [
     {
@@ -97,23 +100,7 @@ const data = {
       ],
     },
   ],
-  navSecondary: [
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
+  
   tags: [
     {
       name: "Data Library",
@@ -141,11 +128,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-3 mt-8"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Smart Tasks</span>
+                <IconInnerShadowTop className="!size-10" />
+                <span className="text-base font-semibold text-xl">Smart Tasks</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
