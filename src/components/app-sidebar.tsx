@@ -6,11 +6,8 @@ import {
   IconDashboard,
   IconFileAi,
   IconFileDescription,
-  IconHelp,
   IconInnerShadowTop,
   IconCalendar,
-  IconSearch,
-  IconSettings,
   IconLayoutKanban,
 
 } from "@tabler/icons-react"
@@ -20,13 +17,11 @@ import { NavMain } from "@/components/nav-main"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { NavSecondary } from "./nav-secondary"
 
 const data = {
   user: {
@@ -102,25 +97,11 @@ const data = {
   ],
   
   tags: [
-    {
-      name: "Data Library",
-      url: "#",
-      color: '#f97316',
-    },
-    {
-      name: "Reports",
-      url: "#",
-      color: '#3b82f6',
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      color: '#10b981',
-    },
+   
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ tags = [], ...props }: React.ComponentProps<typeof Sidebar> & { tags?: any[] }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -140,7 +121,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavTags items={data.tags} />
+        <NavTags items={tags} />
       </SidebarContent>
     </Sidebar>
   )

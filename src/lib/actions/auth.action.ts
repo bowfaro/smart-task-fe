@@ -37,7 +37,7 @@ export async function logoutAction() {
   if (rf) {
     try {
       await logoutApi(rf);
-    } catch {}
+    } catch { }
   }
 
   cookieStore.delete("ac");

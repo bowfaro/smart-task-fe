@@ -30,8 +30,7 @@ export function NavTags({
 }: {
   items: {
     name: string
-    url: string
-    color: string
+    colorCode: string
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -42,11 +41,9 @@ export function NavTags({
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <span style={{ backgroundColor: item.color }} className="!size-4 rounded-full" />
+            <SidebarMenuButton>
+                <span style={{ backgroundColor: item.colorCode }} className="!size-4 rounded-full" />
                 <span>{item.name}</span>
-              </a>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

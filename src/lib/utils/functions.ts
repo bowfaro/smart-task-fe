@@ -21,3 +21,21 @@ export const setCookie = async (
     maxAge: options.maxAge,
   });
 };
+
+export const formatDateTime = (dateString: string | null) => {
+  if (!dateString) return "No date";
+  return new Date(dateString).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+export const formatTimeOnly = (dateString: string | null) => {
+  if (!dateString) return "--:--";
+  return new Date(dateString).toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};

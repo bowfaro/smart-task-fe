@@ -72,7 +72,7 @@ export async function AppHeader({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-10 gap-2 rounded-full px-2.5">
+            <Button variant="ghost" className="h-10 gap-2 rounded-xl pr-10">
               <Avatar className="size-8">
                 <AvatarImage src="" alt={user.name} />
                 <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
