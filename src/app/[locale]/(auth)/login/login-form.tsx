@@ -58,7 +58,7 @@ export function LoginForm({
         <CardContent>
           <Form {...form}>
             <form action={loginAction} className="space-y-4">
-             <PhoneField control={form.control} />
+              <PhoneField control={form.control} />
               <FormField
                 control={form.control}
                 name="password"
