@@ -9,5 +9,21 @@
     "submit": "Đăng nhập",
     "noAccount": "Chưa có tài khoản?",
     "register": "Đăng ký"
+  },
+  "taskDetail": {
+    "title": "Chi tiết công việc",
+    "description": "Xem và chỉnh sửa chi tiết công việc",
+    "taskTitle": "Tiêu đề",
+    "taskDescription": "Mô tả",
+    "startAt": "Bắt đầu lúc",
+    "endAt": "Kết thúc lúc",
+    "status": "Trạng thái",
+    "priority": "Độ ưu tiên",
+    "estimatedHours": "Giờ dự kiến",
+    "save": "Lưu thay đổi",
+    "saveSuccess": "Cập nhật công việc thành công",
+    "saveError": "Cập nhật công việc thất bại",
+    "notFound": "Không tìm thấy công việc",
+    "back": "Quay lại"
   }
 }

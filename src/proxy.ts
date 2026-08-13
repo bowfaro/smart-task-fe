@@ -4,7 +4,7 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 const PUBLIC_ROUTES = ["/login", "/register", "/verify"];
-const PROTECTED_ROUTES = ["/dashboard", "/overview"];
+const PROTECTED_ROUTES = ["/dashboard", "/overview", "/kanban", "/schedule"];
 
 const intlProxy = createMiddleware(routing);
 

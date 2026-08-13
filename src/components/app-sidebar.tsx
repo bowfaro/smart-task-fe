@@ -2,18 +2,17 @@
 
 import * as React from "react"
 import {
-  IconCamera,
   IconDashboard,
-  IconFileAi,
-  IconFileDescription,
   IconInnerShadowTop,
   IconCalendar,
   IconLayoutKanban,
+  IconListDetails,
 
 } from "@tabler/icons-react"
 
 import { NavTags } from "@/components/nav-tags"
 import { NavMain } from "@/components/nav-main"
+import { Link } from "@/i18n/navigation"
 import {
   Sidebar,
   SidebarContent,
@@ -24,75 +23,26 @@ import {
 } from "@/components/ui/sidebar"
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "https://github.com/shadcn.png",
-  },
   navMain: [
     {
       title: "Overview",
-      url: "#",
+      url: "/overview",
       icon: IconDashboard,
     },
     {
       title: "Kanban",
-      url: "#",
+      url: "/kanban",
       icon: IconLayoutKanban,
     },
     {
+      title: "Tasks manager",
+      url: "/tasks",
+      icon: IconListDetails,
+    },
+    {
       title: "Schedule",
-      url: "#",
+      url: "/schedule",
       icon: IconCalendar,
-    },
-    // {title:"Settings", url:"#", icon:IconSettings},
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
     },
   ],
   
@@ -111,10 +61,10 @@ export function AppSidebar({ tags = [], ...props }: React.ComponentProps<typeof 
               asChild
               className="data-[slot=sidebar-menu-button]:!p-3 mt-8"
             >
-              <a href="#">
+              <Link href="/overview">
                 <IconInnerShadowTop className="!size-10" />
                 <span className="text-base font-semibold text-xl">Smart Tasks</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
