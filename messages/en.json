@@ -9,5 +9,21 @@
     "submit": "Sign in",
     "noAccount": "Don't have an account?",
     "register": "Register"
+  },
+  "taskDetail": {
+    "title": "Task Detail",
+    "description": "View and edit task details",
+    "taskTitle": "Title",
+    "taskDescription": "Description",
+    "startAt": "Start At",
+    "endAt": "End At",
+    "status": "Status",
+    "priority": "Priority",
+    "estimatedHours": "Estimated Hours",
+    "save": "Save Changes",
+    "saveSuccess": "Task updated successfully",
+    "saveError": "Failed to update task",
+    "notFound": "Task not found",
+    "back": "Back to Tasks"
   }
 }

@@ -8,5 +8,21 @@
       "username": "ユーザー名",
       "password": "パスワード",
       "submit": "ログイン"
+    },
+    "taskDetail": {
+      "title": "タスク詳細",
+      "description": "タスク詳細の表示と編集",
+      "taskTitle": "タイトル",
+      "taskDescription": "説明",
+      "startAt": "開始日時",
+      "endAt": "終了日時",
+      "status": "ステータス",
+      "priority": "優先度",
+      "estimatedHours": "予定時間",
+      "save": "変更を保存",
+      "saveSuccess": "タスクを更新しました",
+      "saveError": "タスクの更新に失敗しました",
+      "notFound": "タスクが見つかりません",
+      "back": "タスクに戻る"
     }
 }
