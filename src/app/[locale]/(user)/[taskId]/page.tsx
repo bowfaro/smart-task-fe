@@ -7,7 +7,7 @@ export default async function TaskDetailPage({
 }: {
   params: Promise<{ taskId: string; locale: string }>;
 }) {
-  const { taskId, locale } = await params;
+  const { taskId } = await params;
 
   try {
     const task = await getTaskByIdApi(taskId);

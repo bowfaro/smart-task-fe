@@ -24,5 +24,42 @@
       "saveError": "タスクの更新に失敗しました",
       "notFound": "タスクが見つかりません",
       "back": "タスクに戻る"
+    },
+    "tasksList": {
+      "title": "タスク管理",
+      "description": "タスクの表示と編集",
+      "columns": {
+        "title": "タイトル",
+        "status": "ステータス",
+        "priority": "優先度",
+        "startAt": "開始日時",
+        "endAt": "終了日時",
+        "actions": "アクション"
+      },
+      "actions": {
+        "edit": "編集",
+        "save": "保存",
+        "cancel": "キャンセル",
+        "view": "詳細"
+      },
+      "status": {
+        "todo": "未対応",
+        "pending": "保留",
+        "in_progress": "対応中",
+        "done": "完了"
+      },
+      "priority": {
+        "verylow": "非常に低い",
+        "low": "低い",
+        "medium": "中程度",
+        "high": "高い",
+        "veryhigh": "非常に高い"
+      },
+      "saveSuccess": "タスクが正常に更新されました",
+      "saveError": "タスクの更新に失敗しました",
+      "pagination": {
+        "previous": "前へ",
+        "next": "次へ"
+      }
     }
 }

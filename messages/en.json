@@ -7,6 +7,7 @@
     "phonePlaceholder": "Enter your phone number",
     "password": "Password",
     "submit": "Sign in",
+    "loggingIn": "Logging in...",
     "noAccount": "Don't have an account?",
     "register": "Register"
   },
@@ -25,5 +26,42 @@
     "saveError": "Failed to update task",
     "notFound": "Task not found",
     "back": "Back to Tasks"
+  },
+  "tasksList": {
+    "title": "Tasks Management",
+    "description": "View and edit tasks",
+    "columns": {
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "startAt": "Start At",
+      "endAt": "End At",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "view": "View Detail"
+    },
+    "status": {
+      "todo": "To Do",
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "done": "Done"
+    },
+    "priority": {
+      "verylow": "Very Low",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "veryhigh": "Very High"
+    },
+    "saveSuccess": "Task updated successfully",
+    "saveError": "Failed to update task",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }

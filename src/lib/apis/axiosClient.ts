@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
 import { setCookie } from "../utils/functions";
-import { AnyARecord } from "node:dns";
 import { refreshApi } from "./auth.api";
 
 export const publicApi = axios.create({

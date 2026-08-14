@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { cookies } from "next/headers"
 
 import { AppHeader } from "@/components/app-header"
 import { AppSidebar } from "@/components/app-sidebar"
@@ -7,6 +8,11 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { getTagsApi } from "@/lib/apis/tags.api"
 
 export default async function UserLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies()
+  const sidebarCookie = cookieStore.get("sidebar_state")
+  // Default to open; honour whatever the user last set.
+  const defaultSidebarOpen = sidebarCookie ? sidebarCookie.value === "true" : true
+
   let tags = []
   try {
     const res: any = await getTagsApi()
@@ -23,6 +29,7 @@ export default async function UserLayout({ children }: { children: ReactNode }) 
 
   return (
     <SidebarProvider
+      defaultOpen={defaultSidebarOpen}
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",

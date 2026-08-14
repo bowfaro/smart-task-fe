@@ -9,9 +9,9 @@ interface KanbanBoardProps {
 
 const COLUMNS: { id: TaskStatus; title: string }[] = [
   { id: "todo", title: "To Do" },
-  { id: "pending", title: "Pending" },
   { id: "in_progress", title: "In Progress" },
   { id: "done", title: "Done" },
+  { id: "pending", title: "Pending" },
 ];
 
 export function KanbanBoard({ initialTasks }: KanbanBoardProps) {

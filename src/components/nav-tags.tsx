@@ -5,7 +5,6 @@ import {
   IconEdit,
   IconSubtask,
   IconTrash,
-  type Icon,
 } from "@tabler/icons-react"
 
 import {

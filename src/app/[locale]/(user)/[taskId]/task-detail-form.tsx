@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import {  useTransition } from "react";
 import { Task } from "@/lib/apis/tasks.api";
 import { updateTaskAction } from "@/lib/actions/update-task.action";
 import { updateTaskSchema, UpdateTaskInput } from "@/lib/validations/task";
-import { useForm } from "react-hook-form";
+import { useForm, Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -35,7 +35,7 @@ export function TaskDetailForm({ task }: { task: Task }) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<UpdateTaskInput>({
-    resolver: zodResolver(updateTaskSchema),
+    resolver: zodResolver(updateTaskSchema) as Resolver<UpdateTaskInput>,
     defaultValues: {
       title: task.title,
       description: task.description || "",
@@ -61,7 +61,7 @@ export function TaskDetailForm({ task }: { task: Task }) {
 
       if (result.success) {
         toast.success(t("saveSuccess"));
-        router.push("/");
+        router.back();
       } else {
         toast.error(result.error || t("saveError"));
       }
@@ -170,7 +170,17 @@ export function TaskDetailForm({ task }: { task: Task }) {
                   <FormItem>
                     <FormLabel>{t("priority")}</FormLabel>
                     <FormControl>
-                      <Input type="number" min={1} max={5} {...field} />
+                      <select
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        value={field.value}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      >
+                        <option value={1}>Very Low</option>
+                        <option value={2}>Low</option>
+                        <option value={3}>Medium</option>
+                        <option value={4}>High</option>
+                        <option value={5}>Very High</option>
+                      </select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
