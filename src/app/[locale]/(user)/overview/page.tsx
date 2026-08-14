@@ -3,6 +3,7 @@ import { CheckCircle2, Circle, CircleDashed, Clock, CalendarDays, MoreHorizontal
 import { cn } from "@/lib/utils/cn"
 import { getStatsApi, getUpcomingTasksApi } from "@/lib/apis/dashboard.api"
 import { formatDateTime, formatTimeOnly } from "@/lib/utils/functions";
+import { Task } from "@/lib/apis/tasks.api";
 
 export default async function OverviewPage() {
   const [statsData, upcomingTasksResponse] = await Promise.all([
@@ -10,7 +11,7 @@ export default async function OverviewPage() {
     getUpcomingTasksApi()
   ]);
 
-  const upcomingTasks = Array.isArray(upcomingTasksResponse) 
+  const upcomingTasks: Task[] = Array.isArray(upcomingTasksResponse) 
     ? upcomingTasksResponse 
     : (upcomingTasksResponse as any)?.data || (upcomingTasksResponse as any)?.items || (upcomingTasksResponse as any)?.tasks || [];
 
@@ -148,23 +149,25 @@ export default async function OverviewPage() {
                     <div className="flex items-center gap-2">
                       <div className={cn(
                         "inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium capitalize",
-                        task.status === 'completed' ? "bg-green-500/10 text-green-600" :
+                        task.status === 'done' ? "bg-green-500/10 text-green-600" :
                         task.status === 'in_progress' ? "bg-blue-500/10 text-blue-600" :
                         "bg-muted text-muted-foreground"
                       )}>
-                        {task.status === 'completed' ? <CheckCircle2 className="h-3 w-3" /> :
+                        {task.status === 'done' ? <CheckCircle2 className="h-3 w-3" /> :
                         task.status === 'in_progress' ? <CircleDashed className="h-3 w-3" /> :
                         <Circle className="h-3 w-3" />}
                         {task.status.replace('_', ' ')}
                       </div>
-                      <div className={cn(
-                        "inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium",
-                        task.priority === 3 ? "bg-red-500/10 text-red-600" :
-                        task.priority === 2 ? "bg-orange-500/10 text-orange-600" :
-                        "bg-muted text-muted-foreground"
-                      )}>
+                      <div
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium border"
+                        style={{
+                          color:           `var(--priority-${{ 1: 'verylow', 2: 'low', 3: 'medium', 4: 'high', 5: 'veryhigh' }[task.priority] ?? 'verylow'}-text)`,
+                          backgroundColor: `var(--priority-${{ 1: 'verylow', 2: 'low', 3: 'medium', 4: 'high', 5: 'veryhigh' }[task.priority] ?? 'verylow'}-bg)`,
+                          borderColor:     `var(--priority-${{ 1: 'verylow', 2: 'low', 3: 'medium', 4: 'high', 5: 'veryhigh' }[task.priority] ?? 'verylow'}-border)`,
+                        }}
+                      >
                         <Flag className="h-3 w-3" />
-                        P{task.priority}
+                        {{ 1: 'Very Low', 2: 'Low', 3: 'Medium', 4: 'High', 5: 'Very High' }[task.priority] ?? 'Very Low'}
                       </div>
                     </div>
 
@@ -192,7 +195,7 @@ export default async function OverviewPage() {
           <CardHeader className="pb-4 shrink-0">
             <CardTitle className="text-xl">Today&apos;s Tasks</CardTitle>
             <CardDescription>
-              You have {todayTasks.filter(t => t.status !== 'completed').length} tasks left today.
+              You have {todayTasks.filter(t => t.status !== 'done').length} tasks left today.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex-1 overflow-y-auto pr-4 mr-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-thumb]:rounded-full">
@@ -200,7 +203,7 @@ export default async function OverviewPage() {
               {todayTasks.map((task) => (
                 <div key={task.id} className="flex items-start gap-3 group relative p-2 -mx-2 rounded-lg hover:bg-muted/50 transition-colors">
                   <div className="mt-0.5 shrink-0 z-10 bg-background/50 rounded-full">
-                    {task.status === "completed" ? (
+                    {task.status === "done" ? (
                       <CheckCircle2 className="h-5 w-5 text-green-500" />
                     ) : task.status === "in_progress" ? (
                       <CircleDashed className="h-5 w-5 text-blue-500" />
@@ -209,7 +212,7 @@ export default async function OverviewPage() {
                     )}
                   </div>
                   <div className="flex-col gap-1 w-full min-w-0">
-                    <p className={`text-sm font-medium leading-tight truncate ${task.status === "completed" ? "line-through text-muted-foreground opacity-70" : ""}`}>
+                    <p className={`text-sm font-medium leading-tight truncate ${task.status === "done" ? "line-through text-muted-foreground opacity-70" : ""}`}>
                       {task.title}
                     </p>
                     <div className="flex items-center justify-between text-xs text-muted-foreground mt-2">
@@ -222,7 +225,13 @@ export default async function OverviewPage() {
                           <Timer className="h-2.5 w-2.5" />
                           {task.estimatedHours}h
                         </span>
-                        {task.priority === 3 && <Flag className="h-3 w-3 text-red-500 shrink-0" />}
+                        {task.priority >= 3 && (
+                          <span
+                            className="h-2 w-2 rounded-full shrink-0"
+                            style={{ backgroundColor: `var(--priority-${{ 3: 'medium', 4: 'high', 5: 'veryhigh' }[task.priority] ?? 'medium'}-dot)` }}
+                            title={{ 3: 'Medium', 4: 'High', 5: 'Very High' }[task.priority]}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>

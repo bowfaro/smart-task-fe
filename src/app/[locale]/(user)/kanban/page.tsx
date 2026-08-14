@@ -1,8 +1,9 @@
 import { getTasksApi } from "@/lib/apis/tasks.api";
 import { KanbanBoard } from "@/components/kanban-board";
+import { Task } from "@/lib/apis/tasks.api";
 
 export default async function KanbanPage() {
-    let tasks = [] ;
+    let tasks: Task[] = [] ;
     try {
         const res = await getTasksApi();
         tasks = res.items || [];

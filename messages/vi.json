@@ -7,6 +7,7 @@
     "phonePlaceholder": "Nhập số điện thoại",
     "password": "Mật khẩu",
     "submit": "Đăng nhập",
+    "loggingIn": "Đang đăng nhập...",
     "noAccount": "Chưa có tài khoản?",
     "register": "Đăng ký"
   },
@@ -25,5 +26,35 @@
     "saveError": "Cập nhật công việc thất bại",
     "notFound": "Không tìm thấy công việc",
     "back": "Quay lại"
+  },
+  "tasksList": {
+    "title": "Quản lý công việc",
+    "description": "Xem và chỉnh sửa công việc",
+    "columns": {
+      "title": "Tiêu đề",
+      "status": "Trạng thái",
+      "priority": "Độ ưu tiên",
+      "startAt": "Bắt đầu",
+      "endAt": "Kết thúc",
+      "actions": "Hành động"
+    },
+    "actions": {
+      "edit": "Sửa",
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "view": "Chi tiết"
+    },
+    "status": {
+      "todo": "Cần làm",
+      "pending": "Chờ xử lý",
+      "in_progress": "Đang làm",
+      "done": "Hoàn thành"
+    },
+    "saveSuccess": "Cập nhật công việc thành công",
+    "saveError": "Cập nhật công việc thất bại",
+    "pagination": {
+      "previous": "Trước",
+      "next": "Tiếp"
+    }
   }
 }

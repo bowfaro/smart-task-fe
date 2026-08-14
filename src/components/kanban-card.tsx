@@ -1,23 +1,20 @@
 import { Task } from "@/lib/apis/tasks.api";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Clock, AlertCircle } from "lucide-react";
-import { cn } from "@/lib/utils/cn";
+import { PRIORITY_META } from "@/lib/utils/constant";
 
 interface KanbanCardProps {
   task: Task;
 }
 
 export function KanbanCard({ task }: KanbanCardProps) {
-  const getPriorityColor = (priority: number) => {
-    if (priority >= 3) return "text-red-500 bg-red-50 dark:bg-red-950/50";
-    if (priority === 2) return "text-amber-500 bg-amber-50 dark:bg-amber-950/50";
-    return "text-green-600 bg-green-50 dark:bg-green-950/50";
-  };
+  const key = PRIORITY_META[task.priority]?.key ?? PRIORITY_META[1].key;
+  const label = PRIORITY_META[task.priority]?.label ?? PRIORITY_META[1].label;
 
-  const getPriorityLabel = (priority: number) => {
-    if (priority >= 3) return "High";
-    if (priority === 2) return "Medium";
-    return "Low";
+  const badgeStyle = {
+    color: `var(--priority-${key}-text)`,
+    backgroundColor: `var(--priority-${key}-bg)`,
+    borderColor: `var(--priority-${key}-border)`,
   };
 
   return (
@@ -35,21 +32,16 @@ export function KanbanCard({ task }: KanbanCardProps) {
             {task.description}
           </p>
         )}
-        
+
         <div className="flex items-center justify-between mt-1">
           <div
-            className={cn(
-              "flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border",
-              getPriorityColor(task.priority),
-              task.priority >= 3 ? "border-red-200 dark:border-red-900" : 
-              task.priority === 2 ? "border-amber-200 dark:border-amber-900" : 
-              "border-green-200 dark:border-green-900"
-            )}
+            className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border"
+            style={badgeStyle}
           >
             <AlertCircle className="w-3 h-3" />
-            {getPriorityLabel(task.priority)}
+            {label}
           </div>
-          
+
           {task.dueAt && (
             <div className="flex items-center gap-1 text-[11px] text-muted-foreground font-medium">
               <Clock className="w-3.5 h-3.5" />

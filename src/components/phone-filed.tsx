@@ -33,7 +33,7 @@ export default function PhoneField({control}:{control: any}) {
           <FormItem>
             <FormLabel>Phone</FormLabel>
             <FormControl>
-              <Input placeholder={t("phonePlaceholder")} {...field} />
+              <Input type="number" placeholder={t("phonePlaceholder")} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

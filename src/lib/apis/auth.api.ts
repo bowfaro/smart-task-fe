@@ -26,6 +26,10 @@ export function logoutApi(rf: string) {
   return publicApi.post("/auth/logout", { rf }).then((r) => r.data);
 }
 
+export function registerApi(payload: any) {
+  return publicApi.post("/auth/register", payload).then((r) => r.data);
+}
+
 export function getMeApi() {
   return apiRequest<{ id: string; email: string; name: string }>({
     method: "GET",

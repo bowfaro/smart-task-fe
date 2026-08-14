@@ -54,7 +54,7 @@ export function CreateTaskModal({ children }: { children?: React.ReactNode }) {
   })
 
   async function onSubmit(data: TaskFormValues) {
-    const res = await createTaskAction(data)
+    const res = await createTaskAction({ ...data, description: data.description || "" })
     if (res.success) {
       setOpen(false)
       form.reset()
